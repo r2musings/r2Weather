@@ -1,0 +1,35 @@
+﻿<h1>Current Weather</h1>
+
+<div class="container-fluid" (keyup.enter)="getWeather(zip)">
+    <div class="row form-group form-inline">
+        <label for="zip">Enter Zip Code&nbsp;</label>
+        <input type="text" class="f" id="zip" [(ngModel)]="zip" />
+        <input type="button" class="btn btn-default " value="Get Weather" (click)="getWeather(zip)" />
+    </div>   
+    <div class="row">
+        <div *ngIf="weather">
+            <h3>Weather for {{weather.city}} ({{weather.zip}})</h3>
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Current</th>
+                        <th>Summary</th>
+                        <th>Low</th>
+                        <th>High</th>
+                        <th>Humidity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{weather.currentTemp}}</td>
+                        <td>{{weather.summary}}</td>
+                        <td>{{weather.minTemp}}</td>
+                        <td>{{weather.maxTemp}}</td>
+                        <td>{{weather.humidity}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

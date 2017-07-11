@@ -7,11 +7,20 @@ namespace r2weathernet.Models
     {
         public WeatherResult(OpenWeatherResponse openWeatherResponse)
         {
-            CurrentTemp = Convert.ToInt32(Convert.ToDecimal(openWeatherResponse.Main.Temp));
-            MinTemp = Convert.ToInt32(Convert.ToDecimal(openWeatherResponse.Main.Temp_Min));
-            MaxTemp = Convert.ToInt32(Convert.ToDecimal(openWeatherResponse.Main.Temp_Max));
-            Humidity = Convert.ToInt32(Convert.ToDecimal(openWeatherResponse.Main.Humidity));
-            Summary = string.Join(",", openWeatherResponse.Weather.Select(x => x.Main));
+            if (openWeatherResponse.Main == null)
+            {
+                return;                
+            }
+
+            if (openWeatherResponse.Main != null)
+            {
+                CurrentTemp = Convert.ToInt32(Convert.ToDecimal(openWeatherResponse.Main.Temp));
+                MinTemp = Convert.ToInt32(Convert.ToDecimal(openWeatherResponse.Main.Temp_Min));
+                MaxTemp = Convert.ToInt32(Convert.ToDecimal(openWeatherResponse.Main.Temp_Max));
+                Humidity = Convert.ToInt32(Convert.ToDecimal(openWeatherResponse.Main.Humidity));
+            }
+
+            Summary = string.Join(",", openWeatherResponse.Weather?.Select(x => x.Main));
             City = openWeatherResponse.Name;
         }
 

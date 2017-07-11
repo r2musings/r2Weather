@@ -31,6 +31,11 @@ namespace r2weathernet.Controllers
 
                     var stringResult = await response.Content.ReadAsStringAsync();
                     var weather = JsonConvert.DeserializeObject<OpenWeatherResponse>(stringResult);
+                    if (weather.Weather == null || weather.Main == null)
+                    {
+                        return NotFound(new { Error = weather.Message });
+                    }
+
                     var result = new WeatherResult(weather);
                     result.Zip = zip;
                     return Ok(result);

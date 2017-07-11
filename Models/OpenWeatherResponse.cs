@@ -9,6 +9,10 @@ namespace r2weathernet.Models
         public IEnumerable<WeatherDescription> Weather { get; set; }
 
         public Main Main { get; set; }
+
+        public string Message { get; set; }
+
+        public string Cod { get; set; }
     }
 
     public class WeatherDescription

@@ -8,14 +8,21 @@ import { Http } from '@angular/http';
 })
 export class WeatherComponent {
     public weather: Weather;
+    public error: string;
 
     constructor(private http: Http) {
     }
 
     public getWeather(zip: string) {
-        this.http.get('/api/weather/zip/' + zip).subscribe(result => {
-            this.weather = result.json();
-        });
+        this.error = null;
+        this.weather = null;
+        this.http.get('/api/weather/zip/' + zip).subscribe(
+            result => {
+                this.weather = result.json();
+            },
+            error => {
+                this.error = error.statusText;
+            });
     }
 }
 
@@ -27,4 +34,5 @@ interface Weather {
     summary: string;
     zip: string;
     city: string;
+    error: string;
 }

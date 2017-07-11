@@ -5,8 +5,9 @@
         <label for="zip">Enter Zip Code&nbsp;</label>
         <input type="text" class="f" id="zip" [(ngModel)]="zip" />
         <input type="button" class="btn btn-default " value="Get Weather" (click)="getWeather(zip)" />
-    </div>   
+    </div>
     <div class="row">
+        <h3 *ngIf="error" class="col-lg-3 well-sm bg-danger">{{error}}</h3>
         <div *ngIf="weather">
             <h3>Weather for {{weather.city}} ({{weather.zip}})</h3>
 
